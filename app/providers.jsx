@@ -1,0 +1,26 @@
+"use client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "@/components/ui/sonner";
+import Navbar from "@/components/Navbar";
+import { useState } from "react";
+
+const Providers = ({ children }) => {
+  const [queryClient] = useState(() => {
+    return new QueryClient({
+      defaultOptions: {
+        queries: {
+          staleTime: 60 * 1000,
+        },
+      },
+    });
+  });
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Navbar />
+      <Toaster />
+      <main className="max-w-6xl px-8 py-12 mx-auto">{children}</main>
+    </QueryClientProvider>
+  );
+};
+
+export default Providers;

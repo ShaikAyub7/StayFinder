@@ -19,6 +19,7 @@ const Form = ({ action }) => {
       ></textarea>
 
       <Input type="number" placeholder="Price Per Night" name="pricePerNight" />
+      <Input type="location" placeholder="location" name="location" />
 
       <div className="grid w-full max-w-sm items-center gap-3">
         <Label htmlFor="picture">Picture</Label>
