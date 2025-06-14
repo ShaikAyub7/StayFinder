@@ -3,8 +3,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "@/utils/actions";
-import { Card } from "./ui/card";
-import Link from "next/link";
 import ProductCard from "./ProductCard";
 
 const BengaluruHomes = () => {
@@ -20,7 +18,13 @@ const BengaluruHomes = () => {
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
 
-  return <ProductCard location={"Bengaluru"} PopularHome={bengaluruHomes} />;
+  return (
+    <>
+      <div className="flex gap-x-4">
+        <ProductCard location={"Bengaluru"} PopularHome={bengaluruHomes} />
+      </div>
+    </>
+  );
 };
 
 export default BengaluruHomes;

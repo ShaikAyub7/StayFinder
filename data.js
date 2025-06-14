@@ -10,7 +10,24 @@ export const NavbarList = [
     href: "/",
     name: "locations",
     icon: "/summer.png",
-    menu: ["hyderabad", "mumbai", "delhi"],
+    menu: [
+      {
+        name: "hyderabad",
+        href: "hyderabad",
+      },
+      {
+        name: "Mumbai",
+        href: "mumbai",
+      },
+      {
+        name: "delhi",
+        href: "delhi",
+      },
+      {
+        name: "goa",
+        href: "goa",
+      },
+    ],
   },
   {
     href: "/services",

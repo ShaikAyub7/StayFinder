@@ -20,7 +20,13 @@ const PopularHomes = () => {
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
 
-  return <ProductCard location={"hyderabad"} PopularHome={hyderabadHomes} />;
+  return (
+    <>
+      <div className="flex gap-x-4">
+        <ProductCard location={"Bengaluru"} PopularHome={hyderabadHomes} />
+      </div>
+    </>
+  );
 };
 
 export default PopularHomes;

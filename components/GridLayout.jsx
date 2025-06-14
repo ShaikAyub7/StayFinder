@@ -1,11 +1,8 @@
 import React from "react";
-import { Card } from "./ui/card";
-import Link from "next/link";
-import ShortList from "./ShortList";
 
-const ProductCard = ({ location, PopularHome }) => {
+const GridLayout = (location, PopularHome) => {
   return (
-    <>
+    <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-2 overflow-x-auto pb-2 mt-4 scrollbar-hide">
       {PopularHome.length === 0 ? (
         <p>No homes in {location} found.</p>
       ) : (
@@ -30,8 +27,8 @@ const ProductCard = ({ location, PopularHome }) => {
           </Card>
         ))
       )}
-    </>
+    </div>
   );
 };
 
-export default ProductCard;
+export default GridLayout;
