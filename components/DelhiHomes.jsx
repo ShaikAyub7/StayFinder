@@ -7,20 +7,19 @@ import { Card } from "./ui/card";
 import Link from "next/link";
 import ProductCard from "./ProductCard";
 
-const BengaluruHomes = () => {
+const DelhiHomes = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["product"],
     queryFn: getProducts,
   });
 
-  const bengaluruHomes =
-    data?.filter((product) => product.location.toLowerCase() === "bengaluru") ||
-    [];
+  const DelhiHomes =
+    data?.filter((product) => product.location.toLowerCase() === "delhi") || [];
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
 
-  return <ProductCard location={"Bengaluru"} PopularHome={bengaluruHomes} />;
+  return <ProductCard location={"delhi"} PopularHome={DelhiHomes} />;
 };
 
-export default BengaluruHomes;
+export default DelhiHomes;

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import NavigationMenuPage from "./components/NavigationMenu";
 export const NavbarList = [
   {
     href: "/",
@@ -6,13 +7,24 @@ export const NavbarList = [
     icon: "/house.png",
   },
   {
-    href: "/experiences",
-    name: "Experiences",
+    href: "/",
+    name: "locations",
     icon: "/summer.png",
+    menu: ["hyderabad", "mumbai", "delhi"],
   },
   {
     href: "/services",
     name: "Services",
     icon: "/room-service.png",
+  },
+  {
+    href: "/shortList",
+    name: "ShortLits",
+    icon: "/summer.png",
+  },
+  {
+    href: "/host",
+    name: "Host",
+    icon: "/summer.png",
   },
 ];

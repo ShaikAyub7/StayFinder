@@ -121,9 +121,9 @@
   }
 }
 
-body {
+/* body {
   background: #f8f8f8;
-}
+} */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }

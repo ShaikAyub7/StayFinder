@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "@/utils/actions";
 import HyderabadHomes from "@/components/HyderabadHomes";
 import BengaluruHomes from "@/components/BengaluruHomes";
+import DelhiHomes from "@/components/DelhiHomes";
 
 export default function Home() {
   const { data, isLoading, isError } = useQuery({
@@ -13,11 +14,12 @@ export default function Home() {
 
   if (isLoading) return <p>Loading products…</p>;
   if (isError) return <p>Failed to load products.</p>;
-
+  console.log(data);
   return (
-    <div className="  overflow-x-scroll gap-3 scrollbar-hide">
+    <div className="  gap-3  max-w-6xl px-8 py-12 mx-auto ">
       <HyderabadHomes />
       <BengaluruHomes />
+      <DelhiHomes />
     </div>
   );
 }

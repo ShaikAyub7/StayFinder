@@ -14,17 +14,52 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id         String      @id @default(uuid())
+  clerkId    String      @unique
+  email      String
+  name       String
+  createdAt  DateTime    @default(now())
+  ratings    Rating[]
+  shortlists Shortlist[]
+}
 
 model Product {
-  id            String   @id @default(uuid())
+  id            String      @id @default(uuid())
   title         String
   description   String
   location      String
   pricePerNight Int
-  imageUrls     String[] 
+  imageUrls     String[]
   amenities     String[]
-  isAvailable   Boolean  @default(true)
-  hostId        String   
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  isAvailable   Boolean     @default(true)
+  hostId        String
+  shortList     Boolean     @default(false)
+  rating        Float       @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  ratings       Rating[]
+  shortlists    Shortlist[]
+}
+
+model Rating {
+  id        String   @id @default(uuid())
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  value     Float
+  createdAt DateTime @default(now())
+
+  @@unique([productId, userId])
+}
+
+
+model Shortlist {
+  id        String   @id @default(uuid())
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
 }

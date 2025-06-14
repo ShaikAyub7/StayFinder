@@ -18,7 +18,9 @@ const Providers = ({ children }) => {
     <QueryClientProvider client={queryClient}>
       <Navbar />
       <Toaster />
-      <main className="max-w-6xl px-8 py-12 mx-auto">{children}</main>
+      <main className=" bg-white rounded-lg shadow-lg border-gray-300 border-[1px] min-h-screen mt-24">
+        {children}
+      </main>
     </QueryClientProvider>
   );
 };
