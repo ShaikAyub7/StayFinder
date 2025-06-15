@@ -18,7 +18,7 @@ const Navbar = () => {
       <div>
         <h3>StayFinder</h3>
       </div>
-      <div className="space-x-4 bg-white p-4 shadow-md rounded-full  fixed top-1 left-1/4 z-999 hover:shadow-xl hover:p-6 hover:animate-none transition duration-200 mt-2 border-gray-300 border-1">
+      <div className="space-x-4 bg-white p-4 shadow-md rounded-full  fixed top-1 left-1/4 z-999  hover:animate-none transition duration-200 mt-2 border-gray-300 border-1">
         <ul className="flex justify-around gap-x-1 text-gray-500 ">
           {NavbarList.map((item, ind) => {
             return (

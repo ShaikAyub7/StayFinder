@@ -5,6 +5,11 @@ export const NavbarList = [
     href: "/",
     name: "Homes",
     icon: "/house.png",
+    menu: [
+      {
+        name: "hi",
+      },
+    ],
   },
   {
     href: "/",
@@ -33,15 +38,30 @@ export const NavbarList = [
     href: "/services",
     name: "Services",
     icon: "/room-service.png",
+    menu: [
+      {
+        name: "hi",
+      },
+    ],
   },
   {
     href: "/shortList",
     name: "ShortLits",
     icon: "/summer.png",
+    menu: [
+      {
+        name: "hi",
+      },
+    ],
   },
   {
     href: "/host",
     name: "Host",
     icon: "/summer.png",
+    menu: [
+      {
+        name: "hi",
+      },
+    ],
   },
 ];
