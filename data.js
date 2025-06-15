@@ -1,5 +1,5 @@
-import Image from "next/image";
-import NavigationMenuPage from "./components/NavigationMenu";
+import PopularHomes from "@/components/PopularHomes";
+
 export const NavbarList = [
   {
     href: "/",
@@ -64,4 +64,19 @@ export const NavbarList = [
       },
     ],
   },
+];
+
+export const locationTypes = [
+  // {
+  //   location: "hyderabad",
+  //   component: <HyderabadHomes />,
+  // },
+  // {
+  //   location: "bengaluru",
+  //   component: <BengaluruHomes />,
+  // },
+  // {
+  //   location: "delhi",
+  //   component: <DelhiHomes />,
+  // },
 ];

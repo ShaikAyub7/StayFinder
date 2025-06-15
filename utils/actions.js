@@ -214,3 +214,32 @@ export async function getProductAverageRating(productId) {
   const total = ratings.reduce((sum, r) => sum + r.value, 0);
   return (total / ratings.length).toFixed(1);
 }
+
+export const searchProduct = async (formData) => {
+  const searchInput = formData.get("search");
+
+  if (!searchInput) {
+    throw new Error("Search input is required");
+  }
+
+  const searchResults = await prisma.product.findMany({
+    where: {
+      OR: [
+        {
+          title: {
+            contains: searchInput,
+            mode: "insensitive",
+          },
+        },
+        {
+          location: {
+            contains: searchInput,
+            mode: "insensitive",
+          },
+        },
+      ],
+    },
+  });
+
+  return searchResults;
+};

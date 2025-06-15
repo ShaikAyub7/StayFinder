@@ -10,24 +10,30 @@ const ProductCard = ({ location, PopularHome }) => {
         <p>No homes in {location} found.</p>
       ) : (
         PopularHome.map((home) => (
-          <Card
+          <div
             key={home.id}
-            className="w-[220px] min-w-[220px]  p-3 rounded-lg shadow-md hover:shadow-lg transition duration-200 gap-1.5 relative"
+            className="w-[220px] min-w-[250px]   rounded-t-[15px]  transition duration-200 gap-1.5 relative bg-transparent"
           >
-            <ShortList id={home.id} />
+            <ShortList id={home.id} shortList={home.shortList} />
             <Link key={home.id} href={`/${home.id}`} className=" ">
-              <img
-                src={home.imageUrls[0]}
-                alt={home.title}
-                className="w-full h-[180px] rounded-md object-cover mb-2"
-              />
-              <h3 className="font-medium text-lg truncate">{home.title}</h3>
-              <div className="flex text-sm gap-x-2 text-gray-500">
-                <p className=" ">₹{home.pricePerNight} per night</p>
-                <p>⭐ {home.rating}</p>
+              <div>
+                <img
+                  src={home.imageUrls[0]}
+                  alt={home.title}
+                  className="w-full h-[230px] rounded-t-[15px] object-cover mb-1"
+                />
+              </div>
+              <div className="bg-white shadow-md p-2 rounded-b-[15px]">
+                <h3 className="font-medium text-[0.8125rem] p-0.5 truncate capitalize">
+                  {home.title}
+                </h3>
+                <div className="flex text-[0.6875rem] gap-x-4 text-gray-500  p-0.5">
+                  <p className=" ">₹{home.pricePerNight} for 1 night</p>
+                  <p>⭐ {home.rating}</p>
+                </div>
               </div>
             </Link>
-          </Card>
+          </div>
         ))
       )}
     </>
