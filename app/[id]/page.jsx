@@ -2,21 +2,49 @@
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getSingleProductWithHost, rateProduct } from "@/utils/actions";
-import { useState } from "react";
 import ImagesCarousel from "@/components/ImagesCarousel";
-import React from "react";
-import Rating from "@/components/Rating";
 import { Card } from "@/components/ui/card";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import dynamic from "next/dynamic";
+
+const DynamicMap = dynamic(() => import("@/components/Map"), { ssr: false });
 
 export default function ProductPage({ params }) {
   const queryClient = useQueryClient();
   const { id } = React.use(params);
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["singleProduct", id],
     queryFn: () => getSingleProductWithHost(id),
+    enabled: !!id,
   });
 
+  const [position, setPosition] = useState(null);
   const [rateValue, setRateValue] = useState(0);
+
+  useEffect(() => {
+    const fetchCoordinates = async () => {
+      try {
+        if (!data?.location) return;
+
+        const res = await axios.get(
+          `https://api.opencagedata.com/geocode/v1/json?q=${data.location}&key=ba022dcba80f4f21acd9aa84d2eea71e`
+        );
+
+        if (res.data.results.length > 0) {
+          const { lat, lng } = res.data.results[0].geometry;
+          setPosition([lat, lng]);
+        } else {
+          console.error("No location found.");
+        }
+      } catch (err) {
+        console.error("Error fetching location:", err);
+      }
+    };
+
+    fetchCoordinates();
+  }, [data]);
 
   const handleRate = async () => {
     const formData = new FormData();
@@ -32,12 +60,7 @@ export default function ProductPage({ params }) {
 
   return (
     <Card className="flex flex-col p-4 max-w-4xl mx-auto">
-      <div className=" flex items-center justify-center gap-2 rounded-lg ">
-        <div className="w-full">
-          <ImagesCarousel images={data.imageUrls} />
-        </div>
-      </div>
-
+      <ImagesCarousel images={data.imageUrls} />
       <h1 className="text-3xl font-semibold mt-6">{data.title}</h1>
       <p className="text-gray-700 mt-2">{data.description}</p>
       <p className="mt-4 font-medium text-lg">Hosted by {data.host.name}</p>
@@ -58,6 +81,14 @@ export default function ProductPage({ params }) {
         >
           Rate
         </button>
+      </div>
+
+      <div className="mt-8">
+        {position ? (
+          <DynamicMap position={position} location={data.location} />
+        ) : (
+          <p>Loading map...</p>
+        )}
       </div>
     </Card>
   );

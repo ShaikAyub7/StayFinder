@@ -15,7 +15,7 @@ const ShortList = ({ id, shortList }) => {
         variant="icon"
         className={"cursor-pointer text-2xl"}
       >
-        {shortList ? <IoHeart /> : <IoMdHeartEmpty />}
+        {shortList ? "like" : <IoMdHeartEmpty />}
       </Button>
     </form>
   );

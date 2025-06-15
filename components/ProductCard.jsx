@@ -1,7 +1,7 @@
 import React from "react";
-import { Card } from "./ui/card";
 import Link from "next/link";
 import ShortList from "./ShortList";
+import { IoMdStar } from "react-icons/io";
 
 const ProductCard = ({ location, PopularHome }) => {
   return (
@@ -29,7 +29,9 @@ const ProductCard = ({ location, PopularHome }) => {
                 </h3>
                 <div className="flex text-[0.6875rem] gap-x-4 text-gray-500  p-0.5">
                   <p className=" ">₹{home.pricePerNight} for 1 night</p>
-                  <p>⭐ {home.rating}</p>
+                  <p className="flex items-center gap-x-1">
+                    <IoMdStar /> {home.rating}
+                  </p>
                 </div>
               </div>
             </Link>

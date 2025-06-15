@@ -135,3 +135,15 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+.search-bar {
+  display: none;
+
+  background: white;
+  transition: all 8s ease-in-out;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.navbar:hover .search-bar {
+  display: block;
+}
