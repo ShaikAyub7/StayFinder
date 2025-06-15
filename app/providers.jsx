@@ -7,13 +7,7 @@ import Footer from "@/components/Footer";
 
 const Providers = ({ children }) => {
   const [queryClient] = useState(() => {
-    return new QueryClient({
-      defaultOptions: {
-        queries: {
-          staleTime: 60 * 1000,
-        },
-      },
-    });
+    return new QueryClient({});
   });
   return (
     <QueryClientProvider client={queryClient}>
