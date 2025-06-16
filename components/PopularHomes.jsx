@@ -41,7 +41,6 @@ const PopularHomes = () => {
       PopularHome: delhiHomes,
     },
   ];
-
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong!</p>;
 
