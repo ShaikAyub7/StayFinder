@@ -52,8 +52,6 @@ const Navbar = () => {
                         </NavigationMenuItem>
                       </NavigationMenuList>
                     </NavigationMenu>
-                    {/* {item.name}
-                  {item.menu} */}
                   </Link>
                 </li>
               );
