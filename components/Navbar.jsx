@@ -58,7 +58,6 @@ const Navbar = () => {
             })}
           </ul>
         </div>
-
         <div className=" search-bar p-8 shadow-2xl">
           <SearchProducts />
         </div>
