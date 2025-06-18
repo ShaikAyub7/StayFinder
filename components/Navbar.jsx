@@ -42,9 +42,9 @@ const Navbar = () => {
                             {item.menu?.map((location) => (
                               <NavigationMenuLink key={location.name}>
                                 <ul>
-                                  <Nav href={`/location/${location.href}`}>
+                                  <Link href={`/location/${location.href}`}>
                                     <li>{location.name}</li>
-                                  </Nav>
+                                  </Link>
                                 </ul>
                               </NavigationMenuLink>
                             ))}
