@@ -22,7 +22,6 @@ const SearchProducts = () => {
       pro.title.toLowerCase().includes(searchInput) ||
       pro.location.toLowerCase().includes(searchInput)
   );
-
   return (
     <div className="p-5">
       <ProductCard PopularHome={searchData} location={searchData.location} />
