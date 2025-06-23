@@ -15,6 +15,7 @@ const SearchProducts = () => {
   });
 
   if (isLoading) return <p>Loading products…</p>;
+
   if (isError) return <p>Failed to load products.</p>;
 
   const searchData = data?.filter(
