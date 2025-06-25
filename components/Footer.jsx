@@ -46,9 +46,9 @@ const Footer = () => {
         <nav>
           <h6 className="text-lg font-semibold mb-4 text-gray-700">Apps</h6>
           <a className="block hover:underline">Mac</a>
-          <a className="block hover:underline">Windows</a>
+          <a className="block hover:underline ">Windows</a>
           <a className="block hover:underline">iPhone</a>
-          <a className="block hover:underline">Android</a>
+          <a className="block hover:underline ">Android</a>
         </nav>
       </div>
     </footer>
