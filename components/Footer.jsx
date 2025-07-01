@@ -4,6 +4,8 @@ const Footer = () => {
   return (
     <footer className="bg-[#f8f8f8] text-gray-700 p-10  ">
       <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 p-4">
+
+        
         <nav>
           <h6 className="text-lg font-semibold mb-4 text-gray-700">Services</h6>
           <a className="block hover:underline">Branding</a>
