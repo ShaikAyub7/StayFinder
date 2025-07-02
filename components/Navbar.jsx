@@ -12,13 +12,15 @@ import {
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
 import SearchProducts from "./SearchForm";
+import { UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   return (
-    <>
-      <nav className="flex flex-col justify-around gap-x-2 sticky top-2  items-center p-2 z-99999999 navbar">
-        <div className="space-x-4 bg-white p-4 shadow-md rounded-full      hover:animate-none transition duration-200 mt-2 border-gray-300 border-1">
-          <ul className="flex justify-around gap-x-1 text-gray-500 ">
+    <nav className="navbar mb-2 p-5 sticky top-0 z-50 bg-white shadow-sm">
+      <div className="flex  justify-around items-center w-full ">
+        <div className="flex items-center justify-center">StayFInder</div>
+        <div className="">
+          <ul className="flex gap-x-1 text-gray-500 ">
             {NavbarList.map((item, ind) => {
               return (
                 <li key={item.name} className=" ">
@@ -58,11 +60,12 @@ const Navbar = () => {
             })}
           </ul>
         </div>
-        <div className=" search-bar p-8 shadow-2xl">
+        <div className="flex items-center">{<UserButton />}</div>
+        {/* <div className=" search-bar p-8 shadow-2xl">
           <SearchProducts />
-        </div>
-      </nav>
-    </>
+        </div> */}
+      </div>
+    </nav>
   );
 };
 

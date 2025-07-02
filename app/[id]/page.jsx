@@ -7,6 +7,10 @@ import { Card } from "@/components/ui/card";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import dynamic from "next/dynamic";
+import { Star } from "lucide-react";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 const DynamicMap = dynamic(() => import("@/components/Map"), { ssr: false });
 
@@ -22,6 +26,7 @@ export default function ProductPage({ params }) {
 
   const [position, setPosition] = useState(null);
   const [rateValue, setRateValue] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const fetchCoordinates = async () => {
@@ -35,8 +40,6 @@ export default function ProductPage({ params }) {
         if (res.data.results.length > 0) {
           const { lat, lng } = res.data.results[0].geometry;
           setPosition([lat, lng]);
-        } else {
-          console.error("No location found.");
         }
       } catch (err) {
         console.error("Error fetching location:", err);
@@ -47,49 +50,111 @@ export default function ProductPage({ params }) {
   }, [data]);
 
   const handleRate = async () => {
+    setIsSubmitting(true);
     const formData = new FormData();
     formData.set("productId", id);
-    formData.set("rate", rateValue);
+    formData.set("rate", rateValue.toString());
 
     await rateProduct(formData);
     queryClient.invalidateQueries(["singleProduct", id]);
+    setIsSubmitting(false);
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>Error fetching product.</p>;
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="animate-spin h-10 w-10 text-blue-500" />
+      </div>
+    );
+
+  if (isError)
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-red-500 text-lg">Error fetching product.</p>
+      </div>
+    );
 
   return (
-    <Card className="flex flex-col p-4 max-w-4xl mx-auto">
-      <ImagesCarousel images={data.imageUrls} />
-      <h1 className="text-3xl font-semibold mt-6">{data.title}</h1>
-      <p className="text-gray-700 mt-2">{data.description}</p>
-      <p className="mt-4 font-medium text-lg">Hosted by {data.host.name}</p>
-      <p className="text-gray-500">Email: {data.host.email}</p>
+    <div className="bg-gradient-to-b from-gray-100 to-white min-h-screen py-8 px-4">
+      <Card className="max-w-6xl mx-auto p-6 rounded-xl shadow-lg bg-white/70 backdrop-blur-sm">
+        <ImagesCarousel images={data.imageUrls} />
 
-      <div className="flex items-center mt-6 gap-4">
-        <input
-          type="number"
-          min="1"
-          max="5"
-          value={rateValue}
-          onChange={(e) => setRateValue(e.target.value)}
-          className="border p-2 rounded w-24"
-        />
-        <button
-          onClick={handleRate}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          Rate
-        </button>
-      </div>
+        <div className="mt-6 space-y-4">
+          <h1 className="text-4xl font-bold text-gray-800">{data.title}</h1>
+          <p className="text-lg text-gray-600">{data.description}</p>
+          <div className="mt-6 mb-6">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="bg-green-600 hover:bg-green-700">
+                  Proceed to Payment
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="bg-white shadow-xl rounded-lg p-6">
+                <h2 className="text-xl font-semibold mb-4 text-center">
+                  Confirm Purchase
+                </h2>
+                <p className="text-gray-700 mb-6 text-center">
+                  You are about to purchase <strong>{data.title}</strong> for{" "}
+                  <strong>${data.price}</strong>.
+                </p>
+                <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                  Pay Now
+                </Button>
+              </DialogContent>
+            </Dialog>
+          </div>
+          <div className="flex items-center gap-4 mt-4">
+            <img
+              src={data.host.image}
+              alt="host"
+              className="w-10 h-10 rounded-full border-2 border-blue-500"
+            />
+            <div>
+              <p className="text-sm text-gray-500">Hosted by</p>
+              <p className="text-md font-semibold text-gray-800">
+                {data.host.name}
+              </p>
+            </div>
+          </div>
 
-      <div className="mt-8">
-        {position ? (
-          <DynamicMap position={position} location={data.location} />
-        ) : (
-          <p>Loading map...</p>
-        )}
-      </div>
-    </Card>
+          {/* Rating */}
+          <div className="mt-6 ">
+            <div className="flex items-center gap-2">
+              {[1, 2, 3, 4, 5].map((val) => (
+                <Star
+                  key={val}
+                  className={`h-6 w-6 cursor-pointer transition ${
+                    rateValue >= val ? "text-yellow-500" : "text-gray-300"
+                  }`}
+                  onClick={() => setRateValue(val)}
+                  fill={rateValue >= val ? "currentColor" : "none"}
+                />
+              ))}
+            </div>
+            <Button
+              onClick={handleRate}
+              className="mt-2"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting..." : "Submit Rating"}
+            </Button>
+          </div>
+
+          {/* Map */}
+          <div className="mt-10">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+              Location
+            </h2>
+            {position ? (
+              <DynamicMap position={position} location={data.location} />
+            ) : (
+              <p className="text-gray-500">Loading map...</p>
+            )}
+          </div>
+
+          {/* Payment Modal */}
+        </div>
+      </Card>
+    </div>
   );
 }

@@ -13,7 +13,7 @@ const Providers = ({ children }) => {
     <QueryClientProvider client={queryClient}>
       <Navbar />
       <Toaster />
-      <main className=" bg-white rounded-lg shadow-lg border-gray-300 border-[1px] min-h-screen mt-2">
+      <main className=" bg-white rounded-lg shadow-lg min-h-screen mt-2">
         {children}
       </main>
       <Footer />
