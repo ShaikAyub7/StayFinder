@@ -14,6 +14,8 @@ const Footer = () => {
           <a className="block hover:underline">Advertisement</a>
         </nav>
 
+        
+
         <nav>
           <h6 className="text-lg font-semibold mb-4 text-gray-700">Company</h6>
           <a className="block hover:underline">About us</a>
