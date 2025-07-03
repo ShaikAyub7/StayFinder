@@ -27,15 +27,11 @@ export default function ImagesCarousel({ images }) {
         {images.map((imageSrc, index) => (
           <CarouselItem key={index}>
             <div className="p-1 w-full flex justify-center items-center">
-              {/* <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6"> */}
               <img
                 src={imageSrc}
                 alt="image"
                 className="w-full h-99 object-cover rounded-lg"
               />
-              {/* </CardContent>
-              </Card> */}
             </div>
           </CarouselItem>
         ))}
